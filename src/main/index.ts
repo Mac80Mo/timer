@@ -86,6 +86,7 @@ function createWindow(): BrowserWindow {
     minHeight: 540,
     backgroundColor: '#f2efe8',
     title: 'Desktop Timer',
+    icon: join(__dirname, '../../../assets/icon.png'),
     webPreferences: {
       preload: join(__dirname, 'preload.js'),
     },
@@ -160,6 +161,8 @@ ipcMain.handle('timer:set-alarm-duration', (_event, nextDurationSeconds: number)
 });
 
 ipcMain.handle('timer:get-state', () => createSnapshot());
+
+app.setName('Desktop Timer');
 
 app.whenReady().then(() => {
   mainWindow = createWindow();

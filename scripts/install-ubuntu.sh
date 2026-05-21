@@ -21,6 +21,7 @@ wrapper_script="$install_dir/desktop-timer-launch.sh"
 mkdir -p "$install_dir" "$desktop_dir"
 cp "$app_image_source" "$app_image_target"
 chmod +x "$app_image_target"
+cp "$repo_root/assets/icon.png" "$install_dir/timer.png"
 
 cat > "$wrapper_script" <<'WRAPPER'
 #!/usr/bin/env bash
@@ -34,10 +35,11 @@ Type=Application
 Name=Desktop Timer
 Comment=Desktop timer application
 Exec=/bin/bash -- $wrapper_script
-Icon=timer
+Icon=$install_dir/timer.png
 Terminal=false
 Categories=Utility;
 StartupNotify=false
+StartupWMClass=Desktop Timer
 EOF
 
 update-desktop-database "$desktop_dir" >/dev/null 2>&1 || true
