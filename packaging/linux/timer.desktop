@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Desktop Timer
+Comment=Desktop timer application
+Exec=/opt/desktop-timer/desktop-timer.AppImage
+Icon=timer
+Terminal=false
+Categories=Utility;
+StartupNotify=true
