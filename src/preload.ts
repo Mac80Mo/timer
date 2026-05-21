@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
-import type { TimerCommandResult, TimerSnapshot } from './shared/types.js';
+import type { TimerCommandResult, TimerSnapshot } from './shared/types';
 
 contextBridge.exposeInMainWorld('desktopTimer', {
   platform: process.platform,
@@ -15,7 +15,6 @@ contextBridge.exposeInMainWorld('desktopTimer', {
     const wrapped = (_event: Electron.IpcRendererEvent, snapshot: TimerSnapshot) => {
       listener(snapshot);
     };
-
     ipcRenderer.on('timer:state', wrapped);
     return () => {
       ipcRenderer.removeListener('timer:state', wrapped);

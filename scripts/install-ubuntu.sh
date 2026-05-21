@@ -16,20 +16,28 @@ if [[ ! -f "$app_image_source" ]]; then
   exit 1
 fi
 
+wrapper_script="$install_dir/desktop-timer-launch.sh"
+
 mkdir -p "$install_dir" "$desktop_dir"
 cp "$app_image_source" "$app_image_target"
 chmod +x "$app_image_target"
+
+cat > "$wrapper_script" <<'WRAPPER'
+#!/usr/bin/env bash
+exec /home/marcus/.local/share/desktop-timer/desktop-timer.AppImage --no-sandbox --ozone-platform=wayland "$@"
+WRAPPER
+chmod +x "$wrapper_script"
 
 cat > "$desktop_file" <<EOF
 [Desktop Entry]
 Type=Application
 Name=Desktop Timer
 Comment=Desktop timer application
-Exec=$app_image_target
+Exec=/bin/bash -- $wrapper_script
 Icon=timer
 Terminal=false
 Categories=Utility;
-StartupNotify=true
+StartupNotify=false
 EOF
 
 update-desktop-database "$desktop_dir" >/dev/null 2>&1 || true

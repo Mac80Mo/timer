@@ -4,7 +4,6 @@
   "private": true,
   "description": "Desktop timer for Linux, macOS, and Windows.",
   "main": "dist/electron/main/index.js",
-  "type": "module",
   "scripts": {
     "dev": "npm-run-all --parallel dev:main dev:renderer dev:electron",
     "dev:main": "tsc -p tsconfig.electron.json --watch --preserveWatchOutput",
@@ -41,14 +40,18 @@
       "output": "release"
     },
     "files": [
-      "dist/**",
+      "dist/electron/main/index.js",
+      "dist/electron/preload.js",
+      "dist/electron/logic/*.js",
+      "dist/electron/shared/*.js",
+      "dist/renderer/**",
+      "assets/icon.png",
       "package.json"
     ],
     "linux": {
       "icon": "assets/icon.png",
       "target": [
-        "AppImage",
-        "deb"
+        "AppImage"
       ],
       "category": "Utility"
     }
