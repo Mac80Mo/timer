@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Desktop Timer</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero-card" aria-labelledby="app-title">
+        <div class="top-bar">
+          <p class="eyebrow">Timer MVP</p>
+          <label class="theme-toggle" for="theme-toggle">
+            <input id="theme-toggle" type="checkbox" />
+            <span>Light Mode</span>
+          </label>
+        </div>
+        <h1 id="app-title">Desktop Timer</h1>
+        <p class="lede">
+          Ein einzelner Desktop-Timer mit Tastatursteuerung. Mehrere Timer und
+          Packaging folgen in den naechsten Scheiben.
+        </p>
+        <div id="display" class="display-panel" aria-live="polite">00:00</div>
+        <form id="timer-form" class="input-row">
+          <label class="input-label" for="duration-input">Dauer</label>
+          <input
+            id="duration-input"
+            name="duration"
+            type="text"
+            inputmode="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="z. B. 05:30 oder 5m 30s"
+            aria-describedby="shortcut-hints error-message"
+          />
+          <button id="start-button" type="submit">Start</button>
+        </form>
+        <div class="control-row" aria-label="Bedienelemente Timer">
+          <button id="pause-button" type="button">Pause</button>
+          <button id="reset-button" type="button">Reset</button>
+          <button id="test-alarm-button" type="button">Alarm testen</button>
+          <label class="mute-toggle" for="mute-checkbox">
+            <input id="mute-checkbox" type="checkbox" />
+            Alarm stumm
+          </label>
+        </div>
+        <div class="alarm-config">
+          <label class="range-label" for="alarm-duration-input">
+            Alarmdauer: <span id="alarm-duration-value">8</span>s
+          </label>
+          <input
+            id="alarm-duration-input"
+            type="range"
+            min="3"
+            max="20"
+            step="1"
+            value="8"
+          />
+        </div>
+        <p id="audio-status" class="audio-status" aria-live="polite"></p>
+        <section
+          id="alarm-banner"
+          class="alarm-banner"
+          role="status"
+          aria-live="assertive"
+          hidden
+        >
+          <div>
+            <p class="alarm-banner__eyebrow">Alarm</p>
+            <p id="alarm-message" class="alarm-banner__title">Zeit abgelaufen.</p>
+          </div>
+          <button id="dismiss-alarm-button" type="button">Ausblenden</button>
+        </section>
+        <p id="error-message" class="error-message" role="alert"></p>
+        <ul id="shortcut-hints" class="shortcut-list">
+          <li>Enter startet den Timer mit dem Eingabewert.</li>
+          <li>Leertaste pausiert oder setzt fort.</li>
+          <li>R setzt den Timer zurueck.</li>
+          <li>Esc blendet Fehlermeldungen aus.</li>
+        </ul>
+      </section>
+    </main>
+    <script type="module" src="./app.ts"></script>
+  </body>
+</html>

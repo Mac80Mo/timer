@@ -1,0 +1,313 @@
+:root {
+  color-scheme: dark;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --page-bg:
+    radial-gradient(circle at top, rgba(83, 126, 255, 0.22), transparent 36%),
+    linear-gradient(180deg, #12151d 0%, #090b11 100%);
+  --text-color: #edf2ff;
+  --card-bg: rgba(17, 22, 34, 0.88);
+  --card-border: rgba(150, 166, 209, 0.18);
+  --card-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
+  --eyebrow-color: #89a4ff;
+  --lede-color: #c2cbdf;
+  --display-bg: #05070d;
+  --display-text: #f7f9ff;
+  --display-ring: rgba(114, 157, 255, 0.28);
+  --input-bg: rgba(23, 28, 43, 0.96);
+  --input-border: rgba(142, 162, 211, 0.24);
+  --button-bg: #4f7cff;
+  --button-text: #f4f7ff;
+  --audio-status-color: #aeb8d3;
+  --list-color: #aeb8d3;
+  --platform-color: #93a1c7;
+  --error-color: #ff8c88;
+  --toggle-bg: rgba(255, 255, 255, 0.08);
+  background: var(--page-bg);
+  color: var(--text-color);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --page-bg:
+    radial-gradient(circle at top, rgba(246, 201, 89, 0.45), transparent 40%),
+    linear-gradient(180deg, #f7f4ec 0%, #e8dfcf 100%);
+  --text-color: #1f1b16;
+  --card-bg: rgba(255, 250, 242, 0.88);
+  --card-border: rgba(67, 50, 27, 0.12);
+  --card-shadow: 0 24px 60px rgba(70, 48, 18, 0.18);
+  --eyebrow-color: #7c5f32;
+  --lede-color: #3d3225;
+  --display-bg: #201811;
+  --display-text: #fff7ec;
+  --display-ring: rgba(255, 195, 79, 0.24);
+  --input-bg: rgba(255, 253, 248, 0.95);
+  --input-border: rgba(67, 50, 27, 0.24);
+  --button-bg: #af5f23;
+  --button-text: #fff9f2;
+  --audio-status-color: #6c5738;
+  --list-color: #5c4b32;
+  --platform-color: #5c4b32;
+  --error-color: #8d281f;
+  --toggle-bg: rgba(67, 50, 27, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+.hero-card {
+  width: min(100%, 680px);
+  padding: 36px;
+  border-radius: 28px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  color: var(--eyebrow-color);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--toggle-bg);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+}
+
+.lede {
+  max-width: 48ch;
+  line-height: 1.5;
+  margin: 16px 0 28px;
+  color: var(--lede-color);
+}
+
+.display-panel {
+  display: grid;
+  place-items: center;
+  min-height: 180px;
+  margin-bottom: 24px;
+  border-radius: 20px;
+  background: var(--display-bg);
+  color: var(--display-text);
+  font-size: clamp(4rem, 12vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.alarm-active .display-panel {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 8px var(--display-ring);
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.input-label {
+  font-weight: 600;
+}
+
+.input-row input {
+  width: 100%;
+  border: 1px solid var(--input-border);
+  border-radius: 16px;
+  padding: 14px 16px;
+  font: inherit;
+  color: inherit;
+  background: var(--input-bg);
+}
+
+.input-row button,
+.control-row button {
+  cursor: pointer;
+}
+
+.input-row button:disabled,
+.control-row button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.control-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.alarm-config {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--toggle-bg);
+}
+
+.range-label {
+  font-weight: 600;
+}
+
+.alarm-config input[type='range'] {
+  width: 100%;
+}
+
+.alarm-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffe0ae 0%, #ffc462 100%);
+  color: #3b2100;
+  box-shadow: 0 12px 28px rgba(150, 91, 18, 0.18);
+  animation: bannerPulse 0.9s ease-in-out infinite alternate;
+}
+
+.alarm-banner[hidden] {
+  display: none;
+}
+
+.alarm-banner__eyebrow {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.alarm-banner__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.alarm-banner button {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 700;
+  background: rgba(59, 33, 0, 0.9);
+  color: #fff7e8;
+  cursor: pointer;
+}
+
+.input-row button,
+.control-row button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font: inherit;
+  font-weight: 600;
+  background: var(--button-bg);
+  color: var(--button-text);
+}
+
+.mute-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.error-message {
+  min-height: 1.5em;
+  margin: 16px 0 8px;
+  color: var(--error-color);
+  font-weight: 600;
+}
+
+.audio-status {
+  min-height: 1.25em;
+  margin: 12px 0 0;
+  color: var(--audio-status-color);
+  font-size: 0.95rem;
+}
+
+.shortcut-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--list-color);
+  line-height: 1.5;
+}
+
+.platform-note {
+  margin-top: 20px;
+  color: var(--platform-color);
+}
+
+@keyframes bannerPulse {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 780px) {
+  .app-shell {
+    padding: 16px;
+  }
+
+  .hero-card {
+    padding: 24px;
+  }
+
+  .input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .alarm-banner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
